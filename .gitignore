@@ -1,0 +1,9 @@
+*/bin
+*/test-bin
+*.classpath
+*.idea
+*.project
+*.settings
+lib
+
+
