@@ -54,4 +54,8 @@ class HuffmanSuite extends FunSuite with ShouldMatchers {
       assert(decode(t1, encode(t1)("ab".toList)) === "ab".toList)
     }
   }
+
+  test("decoded secret") {
+    decodedSecret.mkString should be("huffmanestcool")
+  }
 }

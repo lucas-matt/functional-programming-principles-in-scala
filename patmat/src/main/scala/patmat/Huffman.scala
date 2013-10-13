@@ -162,7 +162,6 @@ object Huffman {
   }
 
 
-
   // Part 3: Decoding
 
   type Bit = Int
@@ -172,10 +171,17 @@ object Huffman {
    * the resulting list of characters.
    */
   def decode(tree: CodeTree, bits: List[Bit]): List[Char] = {
-    def decodeHelper(bits:List[Bit], chars:List[Char]):List[Char] = {
-      //TODO
+    @tailrec def decodeHelper(subtree:CodeTree, bits:List[Bit], chars:List[Char]):List[Char] = {
+      subtree match {
+        case Leaf(c, _) => decodeHelper(tree, bits, chars :+ c)
+        case Fork(l, r, _, _) => bits match {
+          case Nil => chars
+          case 0 :: bs => decodeHelper(l, bs, chars)
+          case 1 :: bs => decodeHelper(r, bs, chars)
+        }
+      }
     }
-    decodeHelper(bits, List[Char]())
+    decodeHelper(tree, bits, List[Char]())
   }
 
   /**
@@ -194,7 +200,7 @@ object Huffman {
   /**
    * Write a function that returns the decoded secret
    */
-  def decodedSecret: List[Char] = ???
+  def decodedSecret: List[Char] = decode(frenchCode, secret)
 
 
 
