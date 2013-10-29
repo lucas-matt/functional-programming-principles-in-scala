@@ -71,7 +71,23 @@ class AnagramsSuite extends FunSuite {
     assert(combinations(abba).toSet === abbacomb.toSet)
   }
 
+  test("subtract") {
+    val x = List(('a', 1), ('d', 1), ('l', 1), ('r', 1))
+    val y = List(('r', 1))
+    assert(List(('a', 1), ('d', 1), ('l', 1)) == subtract(x, y))
+  }
 
+  test("subtract partial") {
+    val x = List(('a', 1), ('d', 1), ('l', 1), ('r', 47))
+    val y = List(('r', 2))
+    assert(List(('a', 1), ('d', 1), ('l', 1), ('r', 45)) == subtract(x, y))
+  }
+
+  test("subtract over") {
+    val x = List(('a', 1), ('d', 1), ('l', 1), ('r', 1))
+    val y = List(('r', 45))
+    assert(List(('a', 1), ('d', 1), ('l', 1)) == subtract(x, y))
+  }
 
   test("sentence anagrams: []") {
     val sentence = List()
