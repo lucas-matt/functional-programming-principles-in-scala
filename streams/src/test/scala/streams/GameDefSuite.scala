@@ -33,4 +33,19 @@ class GameDefSuite extends FunSuite with GameDef with StringParserTerrain with S
     startBlock should be (Block(Pos(0,0), Pos(0,0)))
   }
 
+  test("neighbours") {
+    Block(Pos(0,0), Pos(0,0)).neighbors.toSet should be(Set(
+      (Block(Pos(0,-2), Pos(0,-1)), Left),
+      (Block(Pos(0,1), Pos(0,2)), Right),
+      (Block(Pos(-2,0), Pos(-1,0)), Up),
+      (Block(Pos(1,0), Pos(2,0)), Down)
+    ))
+  }
+
+  test("legal neighbours") {
+    Block(Pos(0,0), Pos(0,0)).legalNeighbors.toSet should be(Set(
+      (Block(Pos(1,0), Pos(2,0)), Down)
+    ))
+  }
+
 }
